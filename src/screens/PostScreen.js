@@ -1,4 +1,4 @@
-import React, {useState, useLayoutEffect, useCallback} from 'react';
+import React, {useState, useLayoutEffect, useCallback, useEffect} from 'react';
 import {
   ScrollView,
   View,
@@ -10,17 +10,22 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import {LogoTitle} from '../components';
 import {DATA} from '../data';
 import {THEME} from '../theme';
-import {FONT, BOOKMARK, SHARE} from '../source/image';
 
 export const PostScreen = ({navigation, route}) => {
   const [countFont, setCountFont] = useState(0);
+  const [post, setPost] = useState([]);
 
-  const changeFontDescription = useCallback(() => {
-    setCountFont((prev) => (prev >= 2 ? 0 : prev + 1));
-  }, []);
+  useEffect(() => {
+    const postId = route.params.postId;
+    setPost(DATA.find((p) => p.id === postId));
+  }, [route.params.postId]);
+
+  const changeFontDescription = useCallback(
+    () => setCountFont((prev) => (prev >= 2 ? 0 : prev + 1)),
+    [],
+  );
 
   const styleFontDescription = () => {
     switch (countFont) {
@@ -57,22 +62,29 @@ export const PostScreen = ({navigation, route}) => {
       headerRight: (props) => (
         <View style={styles.headerRightContainer}>
           <TouchableOpacity onPress={changeFontDescription}>
-            <LogoTitle link={FONT} {...props} />
+            <Icon
+              name="font-download"
+              size={40}
+              color="white"
+              style={styles.icon}
+            />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => console.log('BOOKMARK')}>
-            {/* <LogoTitle link={BOOKMARK} {...props} /> */}
-            <Icon name="language" size={30} color="#900" />;
+          <TouchableOpacity
+            onPress={() => setPost({...post, bookmark: !post.bookmark})}>
+            <Icon
+              name={post.bookmark ? 'bookmark' : 'bookmark-outline'}
+              size={40}
+              color="white"
+              style={styles.icon}
+            />
           </TouchableOpacity>
           <TouchableOpacity onPress={onShare}>
-            <LogoTitle link={SHARE} {...props} />
+            <Icon name="share" size={40} color="white" style={styles.icon} />
           </TouchableOpacity>
         </View>
       ),
     });
-  }, [changeFontDescription, onShare, navigation, setCountFont]);
-
-  const postId = route.params.postId;
-  const post = DATA.find((p) => p.id === postId);
+  }, [changeFontDescription, onShare, navigation, setCountFont, post]);
 
   return (
     <ScrollView style={styles.container}>
@@ -95,6 +107,9 @@ export const PostScreen = ({navigation, route}) => {
 const styles = StyleSheet.create({
   headerRightContainer: {
     flexDirection: 'row',
+  },
+  icon: {
+    marginRight: 10,
   },
   container: {
     backgroundColor: THEME.MAIN_COLOR,

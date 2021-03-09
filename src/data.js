@@ -6,6 +6,7 @@ export const DATA = [
     description:
       'It’s the summer of 2011. The long-range weather forecast for Tokyo is rain. And it’s not. Going to. Stop. Such is the sad state of affairs in Weathering With You, from Japanese director Makoto Shinkai. His previous work, Your Name, became the first anime not directed by Hayao Miyazaki to earn more than U.S. $100 million at the Japanese box office, achieving $348 million worldwide. With his latest film, Shinkai presents another love story. This one is between Hodaka Morishima, a runaway teen, and Hina, a girl he meets working at a McDonald’s in Tokyo. She has the uncanny ability to stop the rain, at least temporarily.',
     date: new Date().toJSON(),
+    bookmark: false,
   },
   {
     id: 2,
@@ -21,6 +22,7 @@ export const DATA = [
     
     Ждем всех 9 марта на кухне 24 этажа в 11.30, будет мммм… )`,
     date: 'Mar 19, 2021',
+    bookmark: false,
   },
   {
     id: 3,
@@ -30,6 +32,7 @@ export const DATA = [
     description:
       'А не сходить ли нам в баньку? Помнится, мы вам обещали горячий февраль? Так вот, держите! 6 и 27 февраля объявляем банными деньками! В субботу, после трудовой недели, мы решительно перестаем париться о рабочих задачах и идем париться в своё удовольствие в банный комплекс!',
     date: 'Mar 13, 2021',
+    bookmark: true,
   },
   {
     id: 4,
@@ -60,6 +63,7 @@ export const DATA = [
     Когда усну - вернусь к тебе...
     `,
     date: new Date().toJSON(),
+    bookmark: true,
   },
   {
     id: 5,
@@ -67,5 +71,6 @@ export const DATA = [
       'https://wallpaperboat.com/wp-content/uploads/2020/04/aesthetic-anime-wallpaper-image-17-920x518.jpg',
     text: 'post5',
     date: new Date().toJSON(),
+    bookmark: false,
   },
 ];

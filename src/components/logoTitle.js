@@ -9,7 +9,6 @@ const styles = StyleSheet.create({
   logo: {
     width: 40,
     height: 40,
-    marginRight: 10,
-    resizeMode: 'stretch',
+    marginHorizontal: 10,
   },
 });
