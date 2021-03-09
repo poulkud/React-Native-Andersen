@@ -1,29 +1,13 @@
-import React, {useLayoutEffect} from 'react';
+import React from 'react';
 import {View, FlatList, StyleSheet} from 'react-native';
-import {HeaderButtons, Item} from 'react-navigation-header-buttons';
-
-import {AppHeaderIcon} from '../components/AppHeaderIcon';
-import {Post} from '../components/post';
+import {Post} from '../components';
 import {DATA} from '../data';
+import {THEME} from '../theme';
 
 export const MainScreen = ({navigation}) => {
   const goToPost = (post) => {
     navigation.navigate('Post', {postId: post.id, date: post.date});
   };
-
-  // useLayoutEffect(() => {
-  //   navigation.setOptions({
-  //     headerRight: () => (
-  //       <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
-  //         <Item
-  //           title="take photo"
-  //           iconName="alert-outline"
-  //           onPress={() => console.log('Press')}
-  //         />
-  //       </HeaderButtons>
-  //     ),
-  //   });
-  // }, [navigation]);
 
   return (
     <View style={styles.wrapper}>
@@ -38,6 +22,7 @@ export const MainScreen = ({navigation}) => {
 
 const styles = StyleSheet.create({
   wrapper: {
-    padding: 10,
+    backgroundColor: THEME.MAIN_COLOR,
+    padding: 5,
   },
 });

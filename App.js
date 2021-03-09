@@ -1,14 +1,19 @@
 import React from 'react';
+
 import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import {createStackNavigator, HeaderBackButton} from '@react-navigation/stack';
 
+import {LogoTitle} from './src/components';
 import {THEME} from './src/theme';
+import {LOGO} from './src/source/image';
 
-import {MainScreen} from './src/screens/MainScreen';
-import {AboutScreen} from './src/screens/AboutScreen';
-import {BookedScreen} from './src/screens/BookedScreen';
-import {CreateScreen} from './src/screens/CreateScreen';
-import {PostScreen} from './src/screens/PostScreen';
+import {
+  MainScreen,
+  AboutScreen,
+  BookedScreen,
+  CreateScreen,
+  PostScreen,
+} from './src/screens';
 
 const Stack = createStackNavigator();
 
@@ -19,25 +24,28 @@ export default function App() {
         initialRouteName="Main"
         screenOptions={{
           headerStyle: {
+            height: 110,
             backgroundColor: THEME.MAIN_COLOR,
           },
           headerTintColor: THEME.WHITE,
-          headerTitleStyle: {
-            fontFamily: 'OpenSans-Bold',
-          },
         }}>
         <Stack.Screen
           name="Main"
           component={MainScreen}
-          options={{title: 'Main'}}
+          options={{
+            title: 'Новости',
+            headerBackTitle: null,
+            headerRight: (props) => <LogoTitle link={LOGO} {...props} />,
+            headerTitleAlign: 'center',
+          }}
         />
         <Stack.Screen
           name="Post"
           component={PostScreen}
           options={({route}) => ({
-            title: `Пост от ${new Date(
-              route.params.date,
-            ).toLocaleDateString()}`,
+            title: null,
+            headerBackTitleStyle: {marginLeft: 30},
+            headerBackTitle: 'Новости',
           })}
         />
         <Stack.Screen
