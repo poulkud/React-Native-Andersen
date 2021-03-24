@@ -7,14 +7,16 @@ import {
   StyleSheet,
 } from 'react-native';
 
-export const Post = ({post, onOpen}) => {
+import {THEME} from '../theme';
+
+export const News = ({news, onOpen}) => {
   return (
-    <TouchableOpacity activeOpacity={0.5} onPress={() => onOpen(post)}>
-      <View style={styles.post}>
-        <ImageBackground style={styles.img} source={{uri: post.img}}>
+    <TouchableOpacity activeOpacity={0.5} onPress={() => onOpen(news)}>
+      <View style={styles.news}>
+        <ImageBackground style={styles.img} source={{uri: news.img}}>
           <View style={styles.textWrap}>
             <Text style={styles.title}>
-              {new Date(post.date).toLocaleDateString()}
+              {new Date(news.date).toLocaleDateString()}
             </Text>
           </View>
         </ImageBackground>
@@ -24,7 +26,7 @@ export const Post = ({post, onOpen}) => {
 };
 
 const styles = StyleSheet.create({
-  post: {
+  news: {
     marginBottom: 15,
     overflow: 'hidden',
   },
@@ -39,7 +41,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   title: {
-    color: '#fff',
+    color: THEME.WHITE,
     fontFamily: 'OpenSans-Regular',
   },
 });

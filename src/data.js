@@ -62,7 +62,7 @@ export const DATA = [
     Когда усну - вернусь к тебе.
     Когда усну - вернусь к тебе...
     `,
-    date: new Date().toJSON(),
+    date: 'Mar 03, 2021',
     bookmark: true,
   },
   {
@@ -74,3 +74,6 @@ export const DATA = [
     bookmark: false,
   },
 ];
+
+export const ABOUT_APP =
+  'This application was created specifically for Andersen company, in order to test the knowledge of React Native. Enjoy your use!';
