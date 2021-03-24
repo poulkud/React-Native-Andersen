@@ -1,17 +1,52 @@
-import React from 'react';
+import React, {useState, useEffect, useMemo} from 'react';
+import {Provider} from 'react-redux';
+
+import store from './src/store';
+
 import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
 
-import {MainScreen} from './src/screens/MainScreen';
+import DrawerNavigation from './src/navigation/DrawerNavigation';
+import {AuthStackNavigator} from './src/navigation/StackNavigation';
+import {AuthContext} from './src/navigation/context';
 
-const Stack = createStackNavigator();
+import {Loading} from './src/components';
 
-export default function App() {
+const App = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [userToken, setUserToken] = useState(null);
+
+  const authContext = useMemo(() => {
+    return {
+      signIn: (token) => {
+        setIsLoading(false);
+        setUserToken(token);
+      },
+      signOut: () => {
+        setIsLoading(false);
+        setUserToken(null);
+      },
+    };
+  }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+  }, []);
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Main" component={MainScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <AuthContext.Provider value={authContext}>
+        <NavigationContainer>
+          {userToken ? <DrawerNavigation /> : <AuthStackNavigator />}
+        </NavigationContainer>
+      </AuthContext.Provider>
+    </Provider>
   );
-}
+};
+
+export default App;
